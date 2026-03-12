@@ -6,26 +6,52 @@
   <title>Cadieux Founder Command Center</title>
   <style>
     :root{
-      --green:#024628;--cream:#FBF3D4;--ash:#C0C8CE;--black:#1D1D1F;--blue:#4D71BF;--white:#ffffff;--line:#e7e7e7;--soft:#f8f8f8;--warn:#fff6e5;
+      --green:#024628;--cream:#FBF3D4;--ash:#C0C8CE;--black:#1D1D1F;--blue:#4D71BF;--line:#e7e7e7;--soft:#f8f8f8;--warn:#fff6e5;
     }
-    *{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--cream);color:var(--black)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--cream);color:var(--black)}
     .wrap{max-width:1200px;margin:0 auto;padding:24px}
     .hero{background:var(--green);color:var(--cream);border-radius:28px;padding:28px;display:grid;grid-template-columns:1.4fr .9fr;gap:18px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
-    .hero h1{margin:10px 0 8px;font-size:42px;line-height:1.05}.pill{display:inline-block;background:rgba(251,243,212,.13);border:1px solid rgba(251,243,212,.18);padding:8px 12px;border-radius:999px;font-size:12px}
+    .hero h1{margin:10px 0 8px;font-size:42px;line-height:1.05}
+    .pill{display:inline-block;background:rgba(251,243,212,.13);border:1px solid rgba(251,243,212,.18);padding:8px 12px;border-radius:999px;font-size:12px}
     .hero p{margin:0;color:rgba(251,243,212,.88);font-size:15px;line-height:1.5}
-    .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-self:end}.stat{background:#fff;color:var(--black);border-radius:22px;padding:16px;min-height:98px}.stat .k{font-size:12px;color:#666}.stat .v{margin-top:8px;font-size:28px;font-weight:700}
+    .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-self:end}
+    .stat{background:#fff;color:var(--black);border-radius:22px;padding:16px;min-height:98px}
+    .stat .k{font-size:12px;color:#666}.stat .v{margin-top:8px;font-size:28px;font-weight:700}
     .tabs{margin:22px 0;display:grid;grid-template-columns:repeat(5,1fr);background:#fff;border-radius:18px;padding:6px;gap:6px;box-shadow:0 6px 20px rgba(0,0,0,.05)}
-    .tab{border:none;background:transparent;padding:12px 10px;border-radius:14px;cursor:pointer;font-weight:700}.tab.active{background:var(--green);color:var(--cream)}.panel{display:none}.panel.active{display:block}
-    .grid-2{display:grid;grid-template-columns:320px 1fr;gap:20px}.card{background:#fff;border-radius:24px;padding:18px;box-shadow:0 6px 20px rgba(0,0,0,.05);margin-bottom:18px}.card h3{margin:0 0 14px;font-size:22px}
-    .muted{color:#666}.timeline{max-height:620px;overflow:auto;padding-right:6px}.update-item{border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:12px;cursor:pointer;background:#fff}.update-item.active{background:var(--green);color:var(--cream);border-color:var(--green)}
-    .badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.badge{display:inline-block;padding:8px 10px;border-radius:999px;background:#f2f3f4;font-size:12px}.badge.green{background:var(--green);color:var(--cream)}
-    .section-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.box{border-radius:18px;padding:16px;background:var(--soft);min-height:120px}.box.ash{background:var(--ash)}.box.warn{background:var(--warn)}.box h4{margin:0 0 10px;font-size:14px}
-    label{display:block;font-weight:700;margin:14px 0 8px} input[type="text"], input[type="date"], select, textarea{width:100%;border:1px solid #d8d8d8;background:#fff;border-radius:16px;padding:14px;font-size:15px;font-family:inherit} textarea{min-height:110px;resize:vertical}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.areas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.check{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fff;display:flex;gap:10px;align-items:center}
-    .btn{border:none;border-radius:16px;padding:14px 20px;font-weight:700;cursor:pointer}.btn.green{background:var(--green);color:var(--cream)}.btn.black{background:var(--black);color:#fff}.btn.blue{background:var(--blue);color:#fff}.btn.line{background:#fff;border:1px solid var(--line)}
-    .actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}.msg{font-size:14px;color:#666}
-    .list-item{border:1px solid var(--line);background:#fff;border-radius:18px;padding:14px;margin-bottom:10px}.list-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.small{font-size:12px;color:#666}
-    .comment{border:1px solid var(--line);background:#fafafa;border-radius:16px;padding:12px;margin-bottom:10px}.empty{color:#777;font-size:14px;padding:10px 0}
+    .tab{border:none;background:transparent;padding:12px 10px;border-radius:14px;cursor:pointer;font-weight:700}
+    .tab.active{background:var(--green);color:var(--cream)}
+    .panel{display:none}.panel.active{display:block}
+    .grid-2{display:grid;grid-template-columns:320px 1fr;gap:20px}
+    .card{background:#fff;border-radius:24px;padding:18px;box-shadow:0 6px 20px rgba(0,0,0,.05);margin-bottom:18px}
+    .card h3{margin:0 0 14px;font-size:22px}
+    .muted{color:#666}
+    .timeline{max-height:620px;overflow:auto;padding-right:6px}
+    .update-item{border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:12px;cursor:pointer;background:#fff}
+    .update-item.active{background:var(--green);color:var(--cream);border-color:var(--green)}
+    .badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+    .badge{display:inline-block;padding:8px 10px;border-radius:999px;background:#f2f3f4;font-size:12px}
+    .badge.green{background:var(--green);color:var(--cream)}
+    .section-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .box{border-radius:18px;padding:16px;background:var(--soft);min-height:120px}
+    .box.ash{background:var(--ash)}.box.warn{background:var(--warn)}
+    .box h4{margin:0 0 10px;font-size:14px}
+    label{display:block;font-weight:700;margin:14px 0 8px}
+    input[type="text"], input[type="date"], select, textarea{width:100%;border:1px solid #d8d8d8;background:#fff;border-radius:16px;padding:14px;font-size:15px;font-family:inherit}
+    textarea{min-height:110px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .areas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .check{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fff;display:flex;gap:10px;align-items:center}
+    .btn{border:none;border-radius:16px;padding:14px 20px;font-weight:700;cursor:pointer}
+    .btn.green{background:var(--green);color:var(--cream)} .btn.black{background:var(--black);color:#fff} .btn.blue{background:var(--blue);color:#fff} .btn.line{background:#fff;border:1px solid var(--line)}
+    .actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+    .msg{font-size:14px;color:#666}
+    .list-item{border:1px solid var(--line);background:#fff;border-radius:18px;padding:14px;margin-bottom:10px}
+    .list-top{display:flex;justify-content:space-between;gap:12px;align-items:center}
+    .small{font-size:12px;color:#666}
+    .comment{border:1px solid var(--line);background:#fafafa;border-radius:16px;padding:12px;margin-bottom:10px}
+    .empty{color:#777;font-size:14px;padding:10px 0}
+    .topmsg{margin:14px 0 0;font-size:14px}
     @media (max-width:900px){.hero,.grid-2,.section-grid,.row,.tabs{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.hero h1{font-size:34px}.areas{grid-template-columns:1fr}}
   </style>
 </head>
@@ -36,6 +62,7 @@
         <div class="pill">Shared space for daily visibility</div>
         <h1>Cadieux – Founder Command Center</h1>
         <p>A live dashboard for daily work updates, progress tracking, projects, campaigns, and founder review.</p>
+        <div id="syncStatus" class="topmsg">Connecting…</div>
       </div>
       <div class="stats">
         <div class="stat"><div class="k">Daily updates</div><div class="v" id="statUpdates">0</div></div>
@@ -147,53 +174,201 @@
     </div>
   </div>
 
-<script>
-const STORAGE_KEY="cadieux-founder-dashboard-static-v2";
-const AREA_OPTIONS=["Marketing Creatives","Ads / Media Buying","Sales Funnel","Website Updates","Packaging Design","Supplier Coordination","Product Development","Social Media"];
-function uid(){return Math.random().toString(36).slice(2)+Date.now().toString(36)}
-function today(){return new Date().toISOString().slice(0,10)}
-function esc(v){return (v||"").replace(/[&<>"]/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s]))}
-function nl(v){return esc(v).replace(/\n/g,"<br>")}
-const seed={updates:[{id:uid(),date:today(),areas:["Marketing Creatives","Ads / Media Buying","Packaging Design"],tasksCompleted:"Updated protein bread packaging to reflect 19g protein. Created fresh ad copy variations for new campaigns. Reviewed creative direction for next launch assets.",keyProgress:"Packaging revision prepared for review. New ad angles are ready for testing. Brand assets are organized for quick reuse.",blockers:"Waiting on supplier confirmation for final packaging specs.",tomorrowFocus:"Launch updated ad set, finalize packaging file, and update the website hero section.",priority:"High",comments:[{id:uid(),author:"Founder",text:"Good progress. Please prioritize packaging sign-off tomorrow.",createdAt:new Date().toISOString()}]}],projects:[{id:uid(),name:"Protein Bread Packaging Refresh",area:"Packaging Design",status:"In Progress",priority:"High",notes:"Finalize artwork and align with supplier requirements."},{id:uid(),name:"Meta Ads – New Creative Test",area:"Ads / Media Buying",status:"In Progress",priority:"High",notes:"Test multiple hooks and landing page angle variations."}],campaigns:[{id:uid(),name:"Meta Prospecting – Bread Angle A",platform:"Meta",status:"Active",budget:"3000",objective:"Conversions",result:"CTR 2.4%, CPC ₹11.8",notes:"Testing high-protein benefit positioning."}],tasks:[{id:uid(),title:"Finalize packaging revision",area:"Packaging Design",priority:"High",done:false},{id:uid(),title:"Launch next ad test",area:"Ads / Media Buying",priority:"High",done:false}]};
-function getData(){const raw=localStorage.getItem(STORAGE_KEY);if(!raw){localStorage.setItem(STORAGE_KEY,JSON.stringify(seed));return JSON.parse(JSON.stringify(seed))}try{return JSON.parse(raw)}catch(e){localStorage.setItem(STORAGE_KEY,JSON.stringify(seed));return JSON.parse(JSON.stringify(seed))}}
-function setData(data){localStorage.setItem(STORAGE_KEY,JSON.stringify(data));renderAll()}
-function fillSelects(){const pArea=document.getElementById("pArea"),tArea=document.getElementById("tArea");pArea.innerHTML="";tArea.innerHTML="";AREA_OPTIONS.forEach(a=>{pArea.innerHTML+=`<option>${a}</option>`;tArea.innerHTML+=`<option>${a}</option>`});document.getElementById("areas").innerHTML=AREA_OPTIONS.map(a=>`<label class="check"><input type="checkbox" value="${esc(a)}"><span>${esc(a)}</span></label>`).join("")}
-function renderStats(data){document.getElementById("statUpdates").textContent=data.updates.length;document.getElementById("statProjects").textContent=data.projects.filter(x=>x.status!=="Done").length;document.getElementById("statTasks").textContent=data.tasks.filter(x=>x.done).length;document.getElementById("statCampaigns").textContent=data.campaigns.filter(x=>x.status==="Active").length}
-function sortUpdates(updates){return [...updates].sort((a,b)=>new Date(b.date)-new Date(a.date))}
-function selectedId(){return localStorage.getItem("selected-update-id")}
-function setSelectedId(id){localStorage.setItem("selected-update-id",id);renderAll()}
-window.setSelectedId=setSelectedId;
-function renderFounder(data){
- const updates=sortUpdates(data.updates), sel=updates.find(x=>x.id===selectedId())||updates[0], todayUpdate=updates.find(x=>x.date===today())||sel;
- document.getElementById("timeline").innerHTML=updates.length?updates.map(u=>`<div class="update-item ${sel&&sel.id===u.id?"active":""}" onclick="setSelectedId('${u.id}')"><div class="list-top"><strong>${esc(u.date)}</strong><span class="badge ${u.priority==='High'?'green':''}">${esc(u.priority)}</span></div><div class="small" style="margin-top:8px">${esc((u.tomorrowFocus||u.tasksCompleted||"").slice(0,120))}</div></div>`).join(""):`<div class="empty">No updates yet.</div>`;
- document.getElementById("sumTasks").innerHTML=todayUpdate?nl(todayUpdate.tasksCompleted||"No update yet for today."):"No update yet.";
- document.getElementById("sumTomorrow").innerHTML=todayUpdate?nl(todayUpdate.tomorrowFocus||"Add tomorrow’s priorities in the daily update form."):"—";
- document.getElementById("sumProgress").innerHTML=todayUpdate?nl(todayUpdate.keyProgress||"No progress summary yet."):"—";
- document.getElementById("sumBlockers").innerHTML=todayUpdate?nl(todayUpdate.blockers||"No blockers reported."):"—";
- if(!sel){document.getElementById("detail").innerHTML=`<div class="empty">No selected update.</div>`;return}
- const comments=(sel.comments||[]).length?(sel.comments||[]).map(c=>`<div class="comment"><strong>${esc(c.author)}</strong><div style="margin-top:6px">${nl(c.text)}</div><div class="small" style="margin-top:8px">${new Date(c.createdAt).toLocaleString()}</div></div>`).join(""):`<div class="empty">No comments yet.</div>`;
- document.getElementById("detail").innerHTML=`<div class="badges"><span class="badge green">${esc(sel.date)}</span><span class="badge">${esc(sel.priority)} priority</span>${(sel.areas||[]).map(a=>`<span class="badge">${esc(a)}</span>`).join("")}</div><div class="section-grid"><div class="box"><h4>Tasks Completed</h4><div>${nl(sel.tasksCompleted||"—")}</div></div><div class="box"><h4>Key Progress</h4><div>${nl(sel.keyProgress||"—")}</div></div><div class="box"><h4>Blockers</h4><div>${nl(sel.blockers||"—")}</div></div><div class="box"><h4>Tomorrow’s Focus</h4><div>${nl(sel.tomorrowFocus||"—")}</div></div></div><div style="margin-top:18px"><h4 style="margin:0 0 10px">Founder comments</h4>${comments}<label>Add comment</label><textarea id="commentBox" placeholder="Add founder comment or feedback"></textarea><div class="actions"><div></div><button class="btn green" onclick="addComment('${sel.id}')">Add comment</button></div></div>`;
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDdRQjOsPyy-BpoeN1-Jd2d0AF50adcS2w",
+  authDomain: "cadieux-dashboard.firebaseapp.com",
+  projectId: "cadieux-dashboard",
+  storageBucket: "cadieux-dashboard.firebasestorage.app",
+  messagingSenderId: "707070069279",
+  appId: "1:707070069279:web:45d7eeaa6b74f8fdb5a32a",
+  measurementId: "G-2PDXDSYMVE"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const dashboardRef = doc(db, "dashboard", "shared");
+let appData = null;
+
+const AREA_OPTIONS = ["Marketing Creatives","Ads / Media Buying","Sales Funnel","Website Updates","Packaging Design","Supplier Coordination","Product Development","Social Media"];
+function uid(){ return Math.random().toString(36).slice(2)+Date.now().toString(36) }
+function today(){ return new Date().toISOString().slice(0,10) }
+function esc(v){ return (v||"").replace(/[&<>"]/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s])) }
+function nl(v){ return esc(v).replace(/\\n/g,"<br>") }
+const seed = {
+  updates: [{
+    id: uid(), date: today(),
+    areas: ["Marketing Creatives","Ads / Media Buying","Packaging Design"],
+    tasksCompleted: "Updated protein bread packaging to reflect 19g protein. Created fresh ad copy variations for new campaigns. Reviewed creative direction for next launch assets.",
+    keyProgress: "Packaging revision prepared for review. New ad angles are ready for testing. Brand assets are organized for quick reuse.",
+    blockers: "Waiting on supplier confirmation for final packaging specs.",
+    tomorrowFocus: "Launch updated ad set, finalize packaging file, and update the website hero section.",
+    priority: "High",
+    comments: [{ id: uid(), author: "Founder", text: "Good progress. Please prioritize packaging sign-off tomorrow.", createdAt: new Date().toISOString() }]
+  }],
+  projects: [
+    {id: uid(), name:"Protein Bread Packaging Refresh", area:"Packaging Design", status:"In Progress", priority:"High", notes:"Finalize artwork and align with supplier requirements."},
+    {id: uid(), name:"Meta Ads – New Creative Test", area:"Ads / Media Buying", status:"In Progress", priority:"High", notes:"Test multiple hooks and landing page angle variations."}
+  ],
+  campaigns: [
+    {id: uid(), name:"Meta Prospecting – Bread Angle A", platform:"Meta", status:"Active", budget:"3000", objective:"Conversions", result:"CTR 2.4%, CPC ₹11.8", notes:"Testing high-protein benefit positioning."}
+  ],
+  tasks: [
+    {id: uid(), title:"Finalize packaging revision", area:"Packaging Design", priority:"High", done:false},
+    {id: uid(), title:"Launch next ad test", area:"Ads / Media Buying", priority:"High", done:false}
+  ]
+};
+
+function setStatus(text){ document.getElementById("syncStatus").textContent = text; }
+async function saveRemote(data){ setStatus("Saving…"); await setDoc(dashboardRef, data); setStatus("Live sync active"); }
+function sortUpdates(updates){ return [...updates].sort((a,b)=> new Date(b.date) - new Date(a.date)) }
+function selectedId(){ return localStorage.getItem("selected-update-id") }
+function setSelectedId(id){ localStorage.setItem("selected-update-id", id); renderAll() }
+window.setSelectedId = setSelectedId;
+
+function fillSelects(){
+  const pArea = document.getElementById("pArea"), tArea = document.getElementById("tArea");
+  pArea.innerHTML = ""; tArea.innerHTML = "";
+  AREA_OPTIONS.forEach(a => { pArea.innerHTML += `<option>${a}</option>`; tArea.innerHTML += `<option>${a}</option>`; });
+  document.getElementById("areas").innerHTML = AREA_OPTIONS.map(a => `<label class="check"><input type="checkbox" value="${esc(a)}"><span>${esc(a)}</span></label>`).join("");
 }
-function renderProjects(data){document.getElementById("projectList").innerHTML=data.projects.length?data.projects.map(p=>`<div class="list-item"><div class="list-top"><strong>${esc(p.name)}</strong><button class="btn line" onclick="removeProject('${p.id}')">Delete</button></div><div class="small" style="margin-top:8px">${esc(p.area)} • ${esc(p.status)} • ${esc(p.priority)}</div><div style="margin-top:8px">${esc(p.notes||"No notes")}</div></div>`).join(""):`<div class="empty">No projects yet.</div>`}
-function renderCampaigns(data){document.getElementById("campaignList").innerHTML=data.campaigns.length?data.campaigns.map(c=>`<div class="list-item"><div class="list-top"><strong>${esc(c.name)}</strong><button class="btn line" onclick="removeCampaign('${c.id}')">Delete</button></div><div class="small" style="margin-top:8px">${esc(c.platform)} • ${esc(c.status)} • Budget: ${esc(c.budget||"—")}</div><div style="margin-top:8px"><strong>Objective:</strong> ${esc(c.objective||"—")}</div><div style="margin-top:6px"><strong>Result:</strong> ${esc(c.result||"—")}</div><div style="margin-top:6px">${esc(c.notes||"No notes")}</div></div>`).join(""):`<div class="empty">No campaigns yet.</div>`}
-function renderTasks(data){document.getElementById("taskList").innerHTML=data.tasks.length?data.tasks.map(t=>`<div class="list-item"><div class="list-top"><label style="margin:0;display:flex;gap:10px;align-items:center;font-weight:400"><input type="checkbox" ${t.done?"checked":""} onchange="toggleTask('${t.id}')"><span style="${t.done?'text-decoration:line-through;color:#888':''}">${esc(t.title)}</span></label><button class="btn line" onclick="removeTask('${t.id}')">Delete</button></div><div class="small" style="margin-top:8px">${esc(t.area)} • ${esc(t.priority)} priority</div></div>`).join(""):`<div class="empty">No tasks yet.</div>`}
-function renderAll(){const data=getData();renderStats(data);renderFounder(data);renderProjects(data);renderCampaigns(data);renderTasks(data);document.getElementById("uDate").value=today()}
-function getCheckedAreas(){return [...document.querySelectorAll('#areas input[type="checkbox"]:checked')].map(x=>x.value)}
-function saveUpdate(){const data=getData();const update={id:uid(),date:document.getElementById("uDate").value||today(),priority:document.getElementById("uPriority").value,areas:getCheckedAreas(),tasksCompleted:document.getElementById("uTasks").value.trim(),keyProgress:document.getElementById("uProgress").value.trim(),blockers:document.getElementById("uBlockers").value.trim(),tomorrowFocus:document.getElementById("uTomorrow").value.trim(),comments:[]};const hasContent=[update.tasksCompleted,update.keyProgress,update.blockers,update.tomorrowFocus].some(Boolean);if(!hasContent){document.getElementById("saveMsg").textContent="Add at least one detail before saving.";return}data.updates.unshift(update);localStorage.setItem(STORAGE_KEY,JSON.stringify(data));localStorage.setItem("selected-update-id",update.id);document.getElementById("uTasks").value="";document.getElementById("uProgress").value="";document.getElementById("uBlockers").value="";document.getElementById("uTomorrow").value="";[...document.querySelectorAll('#areas input[type="checkbox"]')].forEach(x=>x.checked=false);document.getElementById("saveMsg").textContent="Update saved successfully.";renderAll();setTimeout(()=>{const el=document.getElementById("saveMsg");if(el)el.textContent=""},2500)}
-function addProject(){const name=document.getElementById("pName").value.trim();if(!name)return;const data=getData();data.projects.unshift({id:uid(),name,area:document.getElementById("pArea").value,status:document.getElementById("pStatus").value,priority:document.getElementById("pPriority").value,notes:document.getElementById("pNotes").value.trim()});setData(data);document.getElementById("pName").value="";document.getElementById("pNotes").value=""}
-function addCampaign(){const name=document.getElementById("cName").value.trim();if(!name)return;const data=getData();data.campaigns.unshift({id:uid(),name,platform:document.getElementById("cPlatform").value,status:document.getElementById("cStatus").value,budget:document.getElementById("cBudget").value.trim(),objective:document.getElementById("cObjective").value.trim(),result:document.getElementById("cResult").value.trim(),notes:document.getElementById("cNotes").value.trim()});setData(data);["cName","cBudget","cObjective","cResult","cNotes"].forEach(id=>document.getElementById(id).value="")}
-function addTask(){const title=document.getElementById("tTitle").value.trim();if(!title)return;const data=getData();data.tasks.unshift({id:uid(),title,area:document.getElementById("tArea").value,priority:document.getElementById("tPriority").value,done:false});setData(data);document.getElementById("tTitle").value=""}
-function removeProject(id){const data=getData();data.projects=data.projects.filter(x=>x.id!==id);setData(data)} window.removeProject=removeProject;
-function removeCampaign(id){const data=getData();data.campaigns=data.campaigns.filter(x=>x.id!==id);setData(data)} window.removeCampaign=removeCampaign;
-function removeTask(id){const data=getData();data.tasks=data.tasks.filter(x=>x.id!==id);setData(data)} window.removeTask=removeTask;
-function toggleTask(id){const data=getData();data.tasks=data.tasks.map(x=>x.id===id?{...x,done:!x.done}:x);setData(data)} window.toggleTask=toggleTask;
-function addComment(id){const box=document.getElementById("commentBox");if(!box||!box.value.trim())return;const data=getData();data.updates=data.updates.map(u=>u.id===id?{...u,comments:[...(u.comments||[]),{id:uid(),author:"Founder",text:box.value.trim(),createdAt:new Date().toISOString()}]}:u);setData(data)} window.addComment=addComment;
-document.querySelectorAll(".tab").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));btn.classList.add("active");document.getElementById(btn.dataset.tab).classList.add("active")}));
-document.getElementById("saveUpdateBtn").addEventListener("click",saveUpdate);
-document.getElementById("addProjectBtn").addEventListener("click",addProject);
-document.getElementById("addCampaignBtn").addEventListener("click",addCampaign);
-document.getElementById("addTaskBtn").addEventListener("click",addTask);
-fillSelects();renderAll();
+function renderStats(data){
+  document.getElementById("statUpdates").textContent = data.updates.length;
+  document.getElementById("statProjects").textContent = data.projects.filter(x => x.status !== "Done").length;
+  document.getElementById("statTasks").textContent = data.tasks.filter(x => x.done).length;
+  document.getElementById("statCampaigns").textContent = data.campaigns.filter(x => x.status === "Active").length;
+}
+function renderFounder(data){
+  const updates = sortUpdates(data.updates || []);
+  const sel = updates.find(x => x.id === selectedId()) || updates[0];
+  const todayUpdate = updates.find(x => x.date === today()) || sel;
+  document.getElementById("timeline").innerHTML = updates.length ? updates.map(u => `
+    <div class="update-item ${sel && sel.id===u.id ? "active":""}" onclick="setSelectedId('${u.id}')">
+      <div class="list-top"><strong>${esc(u.date)}</strong><span class="badge ${u.priority==='High'?'green':''}">${esc(u.priority)}</span></div>
+      <div class="small" style="margin-top:8px">${esc((u.tomorrowFocus || u.tasksCompleted || "").slice(0,120))}</div>
+    </div>
+  `).join("") : `<div class="empty">No updates yet.</div>`;
+  document.getElementById("sumTasks").innerHTML = todayUpdate ? nl(todayUpdate.tasksCompleted || "No update yet for today.") : "No update yet.";
+  document.getElementById("sumTomorrow").innerHTML = todayUpdate ? nl(todayUpdate.tomorrowFocus || "Add tomorrow’s priorities in the daily update form.") : "—";
+  document.getElementById("sumProgress").innerHTML = todayUpdate ? nl(todayUpdate.keyProgress || "No progress summary yet.") : "—";
+  document.getElementById("sumBlockers").innerHTML = todayUpdate ? nl(todayUpdate.blockers || "No blockers reported.") : "—";
+  if(!sel){ document.getElementById("detail").innerHTML = `<div class="empty">No selected update.</div>`; return; }
+  const comments = (sel.comments || []).length ? sel.comments.map(c => `
+    <div class="comment"><strong>${esc(c.author)}</strong><div style="margin-top:6px">${nl(c.text)}</div><div class="small" style="margin-top:8px">${new Date(c.createdAt).toLocaleString()}</div></div>
+  `).join("") : `<div class="empty">No comments yet.</div>`;
+  document.getElementById("detail").innerHTML = `
+    <div class="badges"><span class="badge green">${esc(sel.date)}</span><span class="badge">${esc(sel.priority)} priority</span>${(sel.areas || []).map(a => `<span class="badge">${esc(a)}</span>`).join("")}</div>
+    <div class="section-grid">
+      <div class="box"><h4>Tasks Completed</h4><div>${nl(sel.tasksCompleted || "—")}</div></div>
+      <div class="box"><h4>Key Progress</h4><div>${nl(sel.keyProgress || "—")}</div></div>
+      <div class="box"><h4>Blockers</h4><div>${nl(sel.blockers || "—")}</div></div>
+      <div class="box"><h4>Tomorrow’s Focus</h4><div>${nl(sel.tomorrowFocus || "—")}</div></div>
+    </div>
+    <div style="margin-top:18px">
+      <h4 style="margin:0 0 10px">Founder comments</h4>${comments}
+      <label>Add comment</label>
+      <textarea id="commentBox" placeholder="Add founder comment or feedback"></textarea>
+      <div class="actions"><div></div><button class="btn green" onclick="addComment('${sel.id}')">Add comment</button></div>
+    </div>
+  `;
+}
+function renderProjects(data){
+  document.getElementById("projectList").innerHTML = (data.projects || []).length ? data.projects.map(p => `
+    <div class="list-item"><div class="list-top"><strong>${esc(p.name)}</strong><button class="btn line" onclick="removeProject('${p.id}')">Delete</button></div><div class="small" style="margin-top:8px">${esc(p.area)} • ${esc(p.status)} • ${esc(p.priority)}</div><div style="margin-top:8px">${esc(p.notes || "No notes")}</div></div>
+  `).join("") : `<div class="empty">No projects yet.</div>`;
+}
+function renderCampaigns(data){
+  document.getElementById("campaignList").innerHTML = (data.campaigns || []).length ? data.campaigns.map(c => `
+    <div class="list-item"><div class="list-top"><strong>${esc(c.name)}</strong><button class="btn line" onclick="removeCampaign('${c.id}')">Delete</button></div><div class="small" style="margin-top:8px">${esc(c.platform)} • ${esc(c.status)} • Budget: ${esc(c.budget || "—")}</div><div style="margin-top:8px"><strong>Objective:</strong> ${esc(c.objective || "—")}</div><div style="margin-top:6px"><strong>Result:</strong> ${esc(c.result || "—")}</div><div style="margin-top:6px">${esc(c.notes || "No notes")}</div></div>
+  `).join("") : `<div class="empty">No campaigns yet.</div>`;
+}
+function renderTasks(data){
+  document.getElementById("taskList").innerHTML = (data.tasks || []).length ? data.tasks.map(t => `
+    <div class="list-item"><div class="list-top"><label style="margin:0;display:flex;gap:10px;align-items:center;font-weight:400"><input type="checkbox" ${t.done ? "checked":""} onchange="toggleTask('${t.id}')"><span style="${t.done ? "text-decoration:line-through;color:#888" : ""}">${esc(t.title)}</span></label><button class="btn line" onclick="removeTask('${t.id}')">Delete</button></div><div class="small" style="margin-top:8px">${esc(t.area)} • ${esc(t.priority)} priority</div></div>
+  `).join("") : `<div class="empty">No tasks yet.</div>`;
+}
+function renderAll(){
+  if(!appData) return;
+  renderStats(appData); renderFounder(appData); renderProjects(appData); renderCampaigns(appData); renderTasks(appData);
+  document.getElementById("uDate").value = today();
+}
+function getCheckedAreas(){ return [...document.querySelectorAll('#areas input[type="checkbox"]:checked')].map(x => x.value) }
+
+async function saveUpdate(){
+  const update = {
+    id: uid(), date: document.getElementById("uDate").value || today(), priority: document.getElementById("uPriority").value,
+    areas: getCheckedAreas(), tasksCompleted: document.getElementById("uTasks").value.trim(), keyProgress: document.getElementById("uProgress").value.trim(),
+    blockers: document.getElementById("uBlockers").value.trim(), tomorrowFocus: document.getElementById("uTomorrow").value.trim(), comments: []
+  };
+  const hasContent = [update.tasksCompleted, update.keyProgress, update.blockers, update.tomorrowFocus].some(Boolean);
+  if(!hasContent){ document.getElementById("saveMsg").textContent = "Add at least one detail before saving."; return; }
+  const next = JSON.parse(JSON.stringify(appData));
+  next.updates.unshift(update);
+  localStorage.setItem("selected-update-id", update.id);
+  document.getElementById("uTasks").value = ""; document.getElementById("uProgress").value = ""; document.getElementById("uBlockers").value = ""; document.getElementById("uTomorrow").value = "";
+  [...document.querySelectorAll('#areas input[type="checkbox"]')].forEach(x => x.checked = false);
+  document.getElementById("saveMsg").textContent = "Update saved successfully.";
+  await saveRemote(next);
+}
+async function addProject(){
+  const name = document.getElementById("pName").value.trim(); if(!name) return;
+  const next = JSON.parse(JSON.stringify(appData));
+  next.projects.unshift({ id: uid(), name, area: document.getElementById("pArea").value, status: document.getElementById("pStatus").value, priority: document.getElementById("pPriority").value, notes: document.getElementById("pNotes").value.trim() });
+  document.getElementById("pName").value = ""; document.getElementById("pNotes").value = ""; await saveRemote(next);
+}
+async function addCampaign(){
+  const name = document.getElementById("cName").value.trim(); if(!name) return;
+  const next = JSON.parse(JSON.stringify(appData));
+  next.campaigns.unshift({ id: uid(), name, platform: document.getElementById("cPlatform").value, status: document.getElementById("cStatus").value, budget: document.getElementById("cBudget").value.trim(), objective: document.getElementById("cObjective").value.trim(), result: document.getElementById("cResult").value.trim(), notes: document.getElementById("cNotes").value.trim() });
+  ["cName","cBudget","cObjective","cResult","cNotes"].forEach(id => document.getElementById(id).value = ""); await saveRemote(next);
+}
+async function addTask(){
+  const title = document.getElementById("tTitle").value.trim(); if(!title) return;
+  const next = JSON.parse(JSON.stringify(appData));
+  next.tasks.unshift({ id: uid(), title, area: document.getElementById("tArea").value, priority: document.getElementById("tPriority").value, done:false });
+  document.getElementById("tTitle").value = ""; await saveRemote(next);
+}
+async function removeProject(id){ const next = JSON.parse(JSON.stringify(appData)); next.projects = next.projects.filter(x => x.id !== id); await saveRemote(next); }
+async function removeCampaign(id){ const next = JSON.parse(JSON.stringify(appData)); next.campaigns = next.campaigns.filter(x => x.id !== id); await saveRemote(next); }
+async function removeTask(id){ const next = JSON.parse(JSON.stringify(appData)); next.tasks = next.tasks.filter(x => x.id !== id); await saveRemote(next); }
+async function toggleTask(id){ const next = JSON.parse(JSON.stringify(appData)); next.tasks = next.tasks.map(x => x.id === id ? {...x, done: !x.done} : x); await saveRemote(next); }
+async function addComment(id){
+  const box = document.getElementById("commentBox"); if(!box || !box.value.trim()) return;
+  const next = JSON.parse(JSON.stringify(appData));
+  next.updates = next.updates.map(u => u.id === id ? { ...u, comments: [...(u.comments || []), {id: uid(), author:"Founder", text: box.value.trim(), createdAt:new Date().toISOString()}] } : u);
+  await saveRemote(next);
+}
+window.removeProject = removeProject; window.removeCampaign = removeCampaign; window.removeTask = removeTask; window.toggleTask = toggleTask; window.addComment = addComment;
+
+document.querySelectorAll(".tab").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(x => x.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById(btn.dataset.tab).classList.add("active");
+  });
+});
+document.getElementById("saveUpdateBtn").addEventListener("click", saveUpdate);
+document.getElementById("addProjectBtn").addEventListener("click", addProject);
+document.getElementById("addCampaignBtn").addEventListener("click", addCampaign);
+document.getElementById("addTaskBtn").addEventListener("click", addTask);
+
+fillSelects();
+
+async function init(){
+  setStatus("Connecting to cloud…");
+  const snap = await getDoc(dashboardRef);
+  if(!snap.exists()){ await setDoc(dashboardRef, seed); }
+  onSnapshot(dashboardRef, (docSnap) => {
+    appData = docSnap.data();
+    renderAll();
+    setStatus("Live sync active");
+  }, () => { setStatus("Sync error. Please refresh."); });
+}
+init();
 </script>
 </body>
 </html>
