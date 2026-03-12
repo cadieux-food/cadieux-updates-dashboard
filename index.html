@@ -1,684 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cadieux Updates</title>
-  <script src="config.js"></script>
-  <style>
-    :root {
-      --green: #024628;
-      --cream: #FBF3D4;
-      --ash: #C0C8CE;
-      --black: #1D1D1F;
-      --blue: #4D71BF;
-      --white: #ffffff;
-      --border: #e5e7eb;
-      --muted: #6b7280;
-      --warn: #fff7ed;
-      --warn-text: #9a3412;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      background: var(--cream);
-      color: var(--black);
-    }
-    .wrap { max-width: 1280px; margin: 0 auto; padding: 24px; }
-    .hero {
-      background: var(--green);
-      color: var(--cream);
-      padding: 28px;
-      border-radius: 28px;
-      box-shadow: 0 8px 24px rgba(0,0,0,.08);
-      margin-bottom: 24px;
-    }
-    .pill {
-      display: inline-block;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(251,243,212,.12);
-      font-size: 12px;
-      margin-bottom: 12px;
-    }
-    h1,h2,h3,p { margin: 0; }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.4fr .9fr;
-      gap: 20px;
-      align-items: end;
-    }
-    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .stat {
-      background: white;
-      color: var(--black);
-      border-radius: 22px;
-      padding: 16px;
-    }
-    .stat .num { font-size: 30px; font-weight: 700; margin-top: 6px; }
-    .tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      background: white;
-      padding: 8px;
-      border-radius: 18px;
-      margin-bottom: 24px;
-      box-shadow: 0 6px 18px rgba(0,0,0,.05);
-    }
-    .tab-btn {
-      border: 0;
-      background: transparent;
-      padding: 12px 16px;
-      border-radius: 14px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    .tab-btn.active { background: var(--green); color: var(--cream); }
-    .tab { display: none; }
-    .tab.active { display: block; }
-    .grid-main { display: grid; grid-template-columns: 320px 1fr; gap: 20px; }
-    .card {
-      background: white;
-      border-radius: 24px;
-      padding: 20px;
-      box-shadow: 0 6px 18px rgba(0,0,0,.05);
-      margin-bottom: 20px;
-    }
-    .title { font-size: 20px; font-weight: 700; margin-bottom: 14px; }
-    .timeline-item {
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 14px;
-      margin-bottom: 12px;
-      cursor: pointer;
-    }
-    .timeline-item.active { background: var(--green); color: var(--cream); border-color: var(--green); }
-    .muted { color: var(--muted); }
-    .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .mini-card { border-radius: 18px; padding: 16px; background: white; border: 1px solid var(--border); }
-    .mini-card.gray { background: var(--ash); border-color: var(--ash); }
-    .mini-card.warn { background: var(--warn); border-color: #fed7aa; color: var(--warn-text); }
-    .label { font-size: 13px; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
-    textarea, input, select {
-      width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 12px 14px;
-      font: inherit;
-      background: white;
-    }
-    textarea { min-height: 90px; resize: vertical; }
-    .row-2, .row-3, .row-4, .row-5 {
-      display: grid; gap: 12px; margin-bottom: 12px;
-    }
-    .row-2 { grid-template-columns: 1fr 1fr; }
-    .row-3 { grid-template-columns: 1fr 1fr 1fr; }
-    .row-4 { grid-template-columns: 1.6fr 1fr 1fr auto; }
-    .row-5 { grid-template-columns: 1.4fr 110px 140px 120px auto; }
-    .areas {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-    .area {
-      border: 1px solid var(--border);
-      background: white;
-      border-radius: 16px;
-      padding: 10px 12px;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .actions { display: flex; justify-content: flex-end; gap: 10px; }
-    button.primary, button.secondary, button.outline {
-      border: 0;
-      border-radius: 16px;
-      padding: 12px 16px;
-      cursor: pointer;
-      font-weight: 700;
-    }
-    button.primary { background: var(--green); color: var(--cream); }
-    button.secondary { background: var(--blue); color: white; }
-    button.outline { background: white; color: var(--black); border: 1px solid var(--border); }
-    .item-list > .item {
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 14px;
-      margin-top: 12px;
-      display: grid;
-      gap: 12px;
-      align-items: start;
-    }
-    .project-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr auto; }
-    .campaign-grid { grid-template-columns: 1.5fr 100px 150px 120px 1fr auto; }
-    .task {
-      display: flex; justify-content: space-between; gap: 12px; align-items: center;
-      border: 1px solid var(--border); border-radius: 18px; padding: 14px; margin-top: 12px;
-    }
-    .task-left { display: flex; gap: 12px; align-items: center; }
-    .badge {
-      display: inline-block;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: #f3f4f6;
-      font-size: 12px;
-      margin-right: 6px;
-      margin-bottom: 6px;
-    }
-    .comment {
-      border: 1px solid var(--border);
-      background: #fafafa;
-      border-radius: 16px;
-      padding: 12px;
-      margin-bottom: 10px;
-    }
-    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; }
-    .status { font-size: 13px; color: var(--muted); }
-    .note { font-size: 13px; color: var(--muted); line-height: 1.5; }
-    @media (max-width: 980px) {
-      .hero-grid, .grid-main, .summary-grid, .areas, .row-2, .row-3, .row-4, .row-5, .project-grid, .campaign-grid { grid-template-columns: 1fr; }
-      .stats { grid-template-columns: 1fr 1fr; }
-    }
-  </style>
+<title>Cadieux Founder Updates</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+body{
+font-family: Arial;
+background:#FBF3D4;
+margin:0;
+padding:40px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:12px;
+}
+
+textarea{
+width:100%;
+height:100px;
+margin-bottom:20px;
+padding:10px;
+border-radius:8px;
+border:1px solid #ddd;
+}
+
+button{
+background:#024628;
+color:white;
+padding:12px 25px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.update{
+background:#f6f6f6;
+padding:15px;
+border-radius:8px;
+margin-top:20px;
+}
+
+</style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="hero">
-      <div class="hero-grid">
-        <div>
-          <div class="pill">Shared workspace for you and your founder</div>
-          <h1 style="font-size:44px;line-height:1.05;">Cadieux – Founder Command Center</h1>
-          <p style="margin-top:12px;max-width:700px;opacity:.92;line-height:1.6;">Daily updates, tomorrow’s focus, founder comments, ad campaign tracking, projects, and tasks — all from one link at <strong>updates.cadieux.in</strong>.</p>
-        </div>
-        <div class="stats">
-          <div class="stat"><div class="muted">Daily updates</div><div class="num" id="stat-updates">0</div></div>
-          <div class="stat"><div class="muted">Open projects</div><div class="num" id="stat-projects">0</div></div>
-          <div class="stat"><div class="muted">Tasks done</div><div class="num" id="stat-tasks">0</div></div>
-          <div class="stat"><div class="muted">Active campaigns</div><div class="num" id="stat-campaigns">0</div></div>
-        </div>
-      </div>
-    </div>
 
-    <div class="tabs">
-      <button class="tab-btn active" data-tab="founder">Founder View</button>
-      <button class="tab-btn" data-tab="updates">Daily Updates</button>
-      <button class="tab-btn" data-tab="projects">Projects</button>
-      <button class="tab-btn" data-tab="campaigns">Ad Campaigns</button>
-      <button class="tab-btn" data-tab="tasks">Tasks</button>
-    </div>
+<div class="container">
 
-    <div id="status" class="status"></div>
+<h2>Cadieux Daily Update</h2>
 
-    <section class="tab active" id="tab-founder">
-      <div class="grid-main">
-        <div class="card">
-          <div class="title">Update timeline</div>
-          <div id="timeline"></div>
-        </div>
-        <div>
-          <div class="card">
-            <div class="title">Founder summary</div>
-            <div class="summary-grid">
-              <div class="mini-card">
-                <div class="label">Today’s Work</div>
-                <div id="summary-work" class="note"></div>
-              </div>
-              <div class="mini-card">
-                <div class="label">Tomorrow’s Priorities</div>
-                <div id="summary-tomorrow" class="note"></div>
-              </div>
-              <div class="mini-card gray">
-                <div class="label" style="color:#1D1D1F;">Key Progress</div>
-                <div id="summary-progress" class="note" style="color:#1D1D1F"></div>
-              </div>
-              <div class="mini-card warn">
-                <div class="label" style="color:#9a3412;">Blockers</div>
-                <div id="summary-blockers" class="note" style="color:#9a3412"></div>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="topbar">
-              <div class="title" style="margin-bottom:0;">Selected update detail</div>
-              <button class="outline" id="refresh-btn">Refresh</button>
-            </div>
-            <div id="detail"></div>
-          </div>
-        </div>
-      </div>
-    </section>
+<h4>Tasks completed</h4>
+<textarea id="tasks"></textarea>
 
-    <section class="tab" id="tab-updates">
-      <div class="card">
-        <div class="title">Add daily update</div>
-        <div class="row-2">
-          <div><div class="label">Date</div><input id="u-date" type="date"></div>
-          <div><div class="label">Priority</div><select id="u-priority"><option>Low</option><option selected>Medium</option><option>High</option></select></div>
-        </div>
-        <div class="label">Areas worked on</div>
-        <div class="areas" id="areas-box"></div>
-        <div><div class="label">Tasks completed</div><textarea id="u-tasks" placeholder="What got done today?"></textarea></div>
-        <div><div class="label">Key progress</div><textarea id="u-progress" placeholder="What moved forward in a meaningful way?"></textarea></div>
-        <div><div class="label">Blockers</div><textarea id="u-blockers" placeholder="Anything stuck or needing founder input?"></textarea></div>
-        <div><div class="label">Tomorrow’s focus</div><textarea id="u-tomorrow" placeholder="What are tomorrow’s priorities?"></textarea></div>
-        <div class="actions"><button class="primary" id="save-update">Save update</button></div>
-      </div>
-    </section>
+<h4>Key progress</h4>
+<textarea id="progress"></textarea>
 
-    <section class="tab" id="tab-projects">
-      <div class="card">
-        <div class="title">Projects</div>
-        <div class="row-4">
-          <input id="p-name" placeholder="Project name">
-          <select id="p-area"></select>
-          <select id="p-status"><option>Planned</option><option selected>In Progress</option><option>Waiting</option><option>Done</option></select>
-          <button class="secondary" id="add-project">Add project</button>
-        </div>
-        <div class="row-3">
-          <input id="p-due" type="date">
-          <select id="p-priority"><option>Low</option><option selected>Medium</option><option>High</option></select>
-          <input id="p-notes" placeholder="Notes">
-        </div>
-        <div id="projects-list" class="item-list"></div>
-      </div>
-    </section>
+<h4>Blockers</h4>
+<textarea id="blockers"></textarea>
 
-    <section class="tab" id="tab-campaigns">
-      <div class="card">
-        <div class="title">Ad campaign tracker</div>
-        <div class="row-5">
-          <input id="c-name" placeholder="Campaign name">
-          <select id="c-platform"><option>Meta</option><option>Google</option><option>YouTube</option></select>
-          <select id="c-status"><option>Draft</option><option selected>Active</option><option>Paused</option><option>Completed</option></select>
-          <input id="c-budget" placeholder="Budget">
-          <button class="secondary" id="add-campaign">Add</button>
-        </div>
-        <div class="row-3">
-          <input id="c-objective" placeholder="Objective" value="Conversions">
-          <input id="c-result" placeholder="Result snapshot">
-          <input id="c-notes" placeholder="Notes">
-        </div>
-        <div id="campaigns-list" class="item-list"></div>
-      </div>
-    </section>
+<h4>Tomorrow focus</h4>
+<textarea id="tomorrow"></textarea>
 
-    <section class="tab" id="tab-tasks">
-      <div class="card">
-        <div class="title">Task board</div>
-        <div class="row-4">
-          <input id="t-title" placeholder="Add a task">
-          <select id="t-area"></select>
-          <select id="t-priority"><option>Low</option><option selected>Medium</option><option>High</option></select>
-          <button class="secondary" id="add-task">Add task</button>
-        </div>
-        <div id="tasks-list"></div>
-      </div>
-    </section>
-  </div>
+<button onclick="saveUpdate()">Save Update</button>
 
-  <script>
-    const AREA_OPTIONS = [
-      'Marketing Creatives',
-      'Ads / Media Buying',
-      'Sales Funnel',
-      'Website Updates',
-      'Packaging Design',
-      'Supplier Coordination',
-      'Product Development',
-      'Social Media'
-    ];
+<div id="updates"></div>
 
-    const state = {
-      data: { updates: [], projects: [], campaigns: [], tasks: [] },
-      selectedUpdateId: null,
-      selectedAreas: new Set(),
-      pendingScripts: new Map()
-    };
+</div>
 
-    const today = new Date().toISOString().slice(0, 10);
-    document.getElementById('u-date').value = today;
+<script>
 
-    function setStatus(text) {
-      document.getElementById('status').textContent = text;
-    }
+function saveUpdate(){
 
-    function safeText(v) {
-      return (v || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-    }
+let tasks=document.getElementById("tasks").value
+let progress=document.getElementById("progress").value
+let blockers=document.getElementById("blockers").value
+let tomorrow=document.getElementById("tomorrow").value
 
-    function qp(obj) {
-      const p = new URLSearchParams();
-      Object.entries(obj).forEach(([k, v]) => p.set(k, v == null ? '' : String(v)));
-      return p.toString();
-    }
+if(tasks=="" && progress=="" && blockers=="" && tomorrow==""){
+alert("Please write at least one update")
+return
+}
 
-    function jsonp(params) {
-      return new Promise((resolve, reject) => {
-        if (!window.APPS_SCRIPT_URL || window.APPS_SCRIPT_URL.includes('PASTE_')) {
-          reject(new Error('APP Script URL missing in config.js'));
-          return;
-        }
-        const callbackName = 'cb_' + Math.random().toString(36).slice(2);
-        const script = document.createElement('script');
-        window[callbackName] = (data) => {
-          cleanup();
-          resolve(data);
-        };
-        script.onerror = () => {
-          cleanup();
-          reject(new Error('Could not reach Google Apps Script'));
-        };
-        function cleanup() {
-          delete window[callbackName];
-          script.remove();
-        }
-        script.src = `${window.APPS_SCRIPT_URL}?${qp({...params, callback: callbackName})}`;
-        document.body.appendChild(script);
-      });
-    }
+let update={
+date:new Date().toLocaleDateString(),
+tasks:tasks,
+progress:progress,
+blockers:blockers,
+tomorrow:tomorrow
+}
 
-    function renderAreas() {
-      const box = document.getElementById('areas-box');
-      box.innerHTML = AREA_OPTIONS.map(area => `
-        <label class="area"><input type="checkbox" value="${safeText(area)}"> ${safeText(area)}</label>
-      `).join('');
-      box.querySelectorAll('input').forEach(el => {
-        el.addEventListener('change', () => {
-          if (el.checked) state.selectedAreas.add(el.value);
-          else state.selectedAreas.delete(el.value);
-        });
-      });
+let updates=JSON.parse(localStorage.getItem("updates")||"[]")
 
-      ['p-area','t-area'].forEach(id => {
-        document.getElementById(id).innerHTML = AREA_OPTIONS.map(a => `<option>${safeText(a)}</option>`).join('');
-      });
-    }
+updates.unshift(update)
 
-    function stat(id, value) { document.getElementById(id).textContent = value; }
+localStorage.setItem("updates",JSON.stringify(updates))
 
-    function readData() {
-      setStatus('Loading shared workspace...');
-      return jsonp({ action: 'read' })
-        .then(res => {
-          if (!res || !res.ok) throw new Error(res && res.error ? res.error : 'Read failed');
-          state.data = res.data;
-          const updates = [...state.data.updates].sort((a,b) => (b.date || '').localeCompare(a.date || ''));
-          state.data.updates = updates;
-          if (!state.selectedUpdateId && updates[0]) state.selectedUpdateId = updates[0].id;
-          renderAll();
-          setStatus('Connected. Shared data is live.');
-        })
-        .catch(err => setStatus('Error: ' + err.message));
-    }
+loadUpdates()
 
-    function renderAll() {
-      const d = state.data;
-      stat('stat-updates', d.updates.length);
-      stat('stat-projects', d.projects.filter(x => x.status !== 'Done').length);
-      stat('stat-tasks', d.tasks.filter(x => x.done === 'TRUE' || x.done === true).length);
-      stat('stat-campaigns', d.campaigns.filter(x => x.status === 'Active').length);
-      renderTimeline();
-      renderSummary();
-      renderDetail();
-      renderProjects();
-      renderCampaigns();
-      renderTasks();
-    }
+document.getElementById("tasks").value=""
+document.getElementById("progress").value=""
+document.getElementById("blockers").value=""
+document.getElementById("tomorrow").value=""
 
-    function renderTimeline() {
-      const box = document.getElementById('timeline');
-      box.innerHTML = state.data.updates.map(u => `
-        <div class="timeline-item ${u.id === state.selectedUpdateId ? 'active' : ''}" data-id="${safeText(u.id)}">
-          <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;">
-            <strong>${safeText(u.date || '')}</strong>
-            <span class="badge">${safeText(u.priority || 'Medium')}</span>
-          </div>
-          <div class="muted" style="margin-top:8px;line-height:1.4;">${safeText((u.tomorrowFocus || u.tasksCompleted || '').slice(0, 110))}</div>
-        </div>
-      `).join('') || '<div class="note">No updates yet.</div>';
-      box.querySelectorAll('.timeline-item').forEach(el => {
-        el.addEventListener('click', () => {
-          state.selectedUpdateId = el.dataset.id;
-          renderTimeline();
-          renderSummary();
-          renderDetail();
-        });
-      });
-    }
+}
 
-    function getSelectedUpdate() {
-      return state.data.updates.find(u => u.id === state.selectedUpdateId) || state.data.updates[0] || null;
-    }
+function loadUpdates(){
 
-    function renderSummary() {
-      const selected = state.data.updates.find(u => u.date === today) || getSelectedUpdate() || {};
-      document.getElementById('summary-work').textContent = selected.tasksCompleted || 'No update yet.';
-      document.getElementById('summary-tomorrow').textContent = selected.tomorrowFocus || 'No priorities yet.';
-      document.getElementById('summary-progress').textContent = selected.keyProgress || 'No progress summary yet.';
-      document.getElementById('summary-blockers').textContent = selected.blockers || 'No blockers reported.';
-    }
+let updates=JSON.parse(localStorage.getItem("updates")||"[]")
 
-    function renderDetail() {
-      const u = getSelectedUpdate();
-      const box = document.getElementById('detail');
-      if (!u) {
-        box.innerHTML = '<div class="note">No update selected yet.</div>';
-        return;
-      }
-      const comments = (u.comments || []).map(c => `
-        <div class="comment">
-          <div><strong>${safeText(c.author || 'Founder')}</strong></div>
-          <div style="margin-top:6px;">${safeText(c.text || '')}</div>
-          <div class="muted" style="margin-top:8px;font-size:12px;">${safeText(c.createdAt || '')}</div>
-        </div>
-      `).join('') || '<div class="note">No comments yet.</div>';
-      box.innerHTML = `
-        <div style="margin-bottom:10px;">
-          <span class="badge">${safeText(u.date || '')}</span>
-          <span class="badge">${safeText(u.priority || 'Medium')} priority</span>
-          ${(u.areas || []).map(a => `<span class="badge">${safeText(a)}</span>`).join('')}
-        </div>
-        <div class="summary-grid" style="margin-bottom:16px;">
-          <div><div class="label">Tasks Completed</div><div class="note">${safeText(u.tasksCompleted || '—')}</div></div>
-          <div><div class="label">Key Progress</div><div class="note">${safeText(u.keyProgress || '—')}</div></div>
-          <div><div class="label">Blockers</div><div class="note">${safeText(u.blockers || '—')}</div></div>
-          <div><div class="label">Tomorrow’s Focus</div><div class="note">${safeText(u.tomorrowFocus || '—')}</div></div>
-        </div>
-        <div class="label">Founder comments</div>
-        ${comments}
-        <div class="label" style="margin-top:12px;">Add comment</div>
-        <textarea id="comment-text" placeholder="Founder feedback or comment"></textarea>
-        <div class="actions" style="margin-top:10px;"><button class="primary" id="save-comment">Add comment</button></div>
-      `;
-      document.getElementById('save-comment').addEventListener('click', () => {
-        const text = document.getElementById('comment-text').value.trim();
-        if (!text) return;
-        saveComment(u.id, text);
-      });
-    }
+let html=""
 
-    function renderProjects() {
-      const box = document.getElementById('projects-list');
-      box.innerHTML = state.data.projects.map(p => `
-        <div class="item project-grid">
-          <div><strong>${safeText(p.name)}</strong><div class="muted" style="margin-top:6px;">${safeText(p.notes || 'No notes')}</div></div>
-          <div><div class="label">Area</div>${safeText(p.area || '')}</div>
-          <div><div class="label">Status</div>
-            <select data-kind="project-status" data-id="${safeText(p.id)}">
-              ${['Planned','In Progress','Waiting','Done'].map(v => `<option ${p.status===v?'selected':''}>${v}</option>`).join('')}
-            </select>
-          </div>
-          <div><div class="label">Priority</div>
-            <select data-kind="project-priority" data-id="${safeText(p.id)}">
-              ${['Low','Medium','High'].map(v => `<option ${p.priority===v?'selected':''}>${v}</option>`).join('')}
-            </select>
-          </div>
-          <div><button class="outline" data-kind="project-delete" data-id="${safeText(p.id)}">Delete</button></div>
-        </div>
-      `).join('') || '<div class="note">No projects yet.</div>';
-      bindProjectActions();
-    }
+updates.forEach(u=>{
 
-    function renderCampaigns() {
-      const box = document.getElementById('campaigns-list');
-      box.innerHTML = state.data.campaigns.map(c => `
-        <div class="item campaign-grid">
-          <div><strong>${safeText(c.name)}</strong><div class="muted" style="margin-top:6px;">${safeText(c.notes || 'No notes')}</div></div>
-          <div><div class="label">Platform</div>${safeText(c.platform || '')}</div>
-          <div><div class="label">Status</div>
-            <select data-kind="campaign-status" data-id="${safeText(c.id)}">
-              ${['Draft','Active','Paused','Completed'].map(v => `<option ${c.status===v?'selected':''}>${v}</option>`).join('')}
-            </select>
-          </div>
-          <div><div class="label">Budget</div><input data-kind="campaign-budget" data-id="${safeText(c.id)}" value="${safeText(c.budget || '')}"></div>
-          <div><div class="label">Result</div><input data-kind="campaign-result" data-id="${safeText(c.id)}" value="${safeText(c.result || '')}"></div>
-          <div><button class="outline" data-kind="campaign-delete" data-id="${safeText(c.id)}">Delete</button></div>
-        </div>
-      `).join('') || '<div class="note">No campaigns yet.</div>';
-      bindCampaignActions();
-    }
+html+=`
+<div class="update">
+<b>${u.date}</b><br><br>
+<b>Tasks</b><br>${u.tasks}<br><br>
+<b>Progress</b><br>${u.progress}<br><br>
+<b>Blockers</b><br>${u.blockers}<br><br>
+<b>Tomorrow</b><br>${u.tomorrow}
+</div>
+`
 
-    function renderTasks() {
-      const box = document.getElementById('tasks-list');
-      box.innerHTML = state.data.tasks.map(t => `
-        <div class="task">
-          <div class="task-left">
-            <input type="checkbox" data-kind="task-toggle" data-id="${safeText(t.id)}" ${t.done === 'TRUE' || t.done === true ? 'checked' : ''}>
-            <div>
-              <div style="font-weight:700;${t.done === 'TRUE' || t.done === true ? 'text-decoration:line-through;color:#9ca3af;' : ''}">${safeText(t.title)}</div>
-              <div class="muted" style="font-size:12px;margin-top:4px;">${safeText(t.area || '')} • ${safeText(t.priority || 'Medium')} priority</div>
-            </div>
-          </div>
-          <button class="outline" data-kind="task-delete" data-id="${safeText(t.id)}">Delete</button>
-        </div>
-      `).join('') || '<div class="note">No tasks yet.</div>';
-      bindTaskActions();
-    }
+})
 
-    function saveUpdate() {
-      const payload = {
-        action: 'addUpdate',
-        date: document.getElementById('u-date').value,
-        priority: document.getElementById('u-priority').value,
-        areas: [...state.selectedAreas].join(' | '),
-        tasksCompleted: document.getElementById('u-tasks').value.trim(),
-        keyProgress: document.getElementById('u-progress').value.trim(),
-        blockers: document.getElementById('u-blockers').value.trim(),
-        tomorrowFocus: document.getElementById('u-tomorrow').value.trim()
-      };
-      setStatus('Saving update...');
-      jsonp(payload).then(res => {
-        if (!res.ok) throw new Error(res.error || 'Save failed');
-        document.getElementById('u-tasks').value = '';
-        document.getElementById('u-progress').value = '';
-        document.getElementById('u-blockers').value = '';
-        document.getElementById('u-tomorrow').value = '';
-        state.selectedAreas.clear();
-        renderAreas();
-        readData();
-      }).catch(err => setStatus('Error: ' + err.message));
-    }
+document.getElementById("updates").innerHTML=html
 
-    function saveComment(updateId, text) {
-      setStatus('Saving comment...');
-      jsonp({ action: 'addComment', updateId, author: 'Founder', text })
-        .then(res => { if (!res.ok) throw new Error(res.error || 'Comment failed'); return readData(); })
-        .catch(err => setStatus('Error: ' + err.message));
-    }
+}
 
-    function addProject() {
-      setStatus('Saving project...');
-      jsonp({
-        action: 'addProject',
-        name: document.getElementById('p-name').value.trim(),
-        area: document.getElementById('p-area').value,
-        status: document.getElementById('p-status').value,
-        priority: document.getElementById('p-priority').value,
-        dueDate: document.getElementById('p-due').value,
-        notes: document.getElementById('p-notes').value.trim()
-      }).then(res => {
-        if (!res.ok) throw new Error(res.error || 'Project failed');
-        document.getElementById('p-name').value = '';
-        document.getElementById('p-due').value = '';
-        document.getElementById('p-notes').value = '';
-        readData();
-      }).catch(err => setStatus('Error: ' + err.message));
-    }
+loadUpdates()
 
-    function addCampaign() {
-      setStatus('Saving campaign...');
-      jsonp({
-        action: 'addCampaign',
-        name: document.getElementById('c-name').value.trim(),
-        platform: document.getElementById('c-platform').value,
-        status: document.getElementById('c-status').value,
-        budget: document.getElementById('c-budget').value.trim(),
-        objective: document.getElementById('c-objective').value.trim(),
-        result: document.getElementById('c-result').value.trim(),
-        notes: document.getElementById('c-notes').value.trim()
-      }).then(res => {
-        if (!res.ok) throw new Error(res.error || 'Campaign failed');
-        document.getElementById('c-name').value = '';
-        document.getElementById('c-budget').value = '';
-        document.getElementById('c-result').value = '';
-        document.getElementById('c-notes').value = '';
-        readData();
-      }).catch(err => setStatus('Error: ' + err.message));
-    }
+</script>
 
-    function addTask() {
-      setStatus('Saving task...');
-      jsonp({
-        action: 'addTask',
-        title: document.getElementById('t-title').value.trim(),
-        area: document.getElementById('t-area').value,
-        priority: document.getElementById('t-priority').value
-      }).then(res => {
-        if (!res.ok) throw new Error(res.error || 'Task failed');
-        document.getElementById('t-title').value = '';
-        readData();
-      }).catch(err => setStatus('Error: ' + err.message));
-    }
-
-    function bindProjectActions() {
-      document.querySelectorAll('[data-kind="project-status"]').forEach(el => el.onchange = () => jsonp({ action:'updateProject', id:el.dataset.id, field:'status', value:el.value }).then(readData));
-      document.querySelectorAll('[data-kind="project-priority"]').forEach(el => el.onchange = () => jsonp({ action:'updateProject', id:el.dataset.id, field:'priority', value:el.value }).then(readData));
-      document.querySelectorAll('[data-kind="project-delete"]').forEach(el => el.onclick = () => jsonp({ action:'deleteProject', id:el.dataset.id }).then(readData));
-    }
-
-    function bindCampaignActions() {
-      document.querySelectorAll('[data-kind="campaign-status"]').forEach(el => el.onchange = () => jsonp({ action:'updateCampaign', id:el.dataset.id, field:'status', value:el.value }).then(readData));
-      document.querySelectorAll('[data-kind="campaign-budget"]').forEach(el => el.onchange = () => jsonp({ action:'updateCampaign', id:el.dataset.id, field:'budget', value:el.value }).then(readData));
-      document.querySelectorAll('[data-kind="campaign-result"]').forEach(el => el.onchange = () => jsonp({ action:'updateCampaign', id:el.dataset.id, field:'result', value:el.value }).then(readData));
-      document.querySelectorAll('[data-kind="campaign-delete"]').forEach(el => el.onclick = () => jsonp({ action:'deleteCampaign', id:el.dataset.id }).then(readData));
-    }
-
-    function bindTaskActions() {
-      document.querySelectorAll('[data-kind="task-toggle"]').forEach(el => el.onchange = () => jsonp({ action:'toggleTask', id:el.dataset.id, done:el.checked }).then(readData));
-      document.querySelectorAll('[data-kind="task-delete"]').forEach(el => el.onclick = () => jsonp({ action:'deleteTask', id:el.dataset.id }).then(readData));
-    }
-
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active'));
-        document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-      });
-    });
-
-    document.getElementById('save-update').onclick = saveUpdate;
-    document.getElementById('add-project').onclick = addProject;
-    document.getElementById('add-campaign').onclick = addCampaign;
-    document.getElementById('add-task').onclick = addTask;
-    document.getElementById('refresh-btn').onclick = readData;
-
-    renderAreas();
-    readData();
-  </script>
 </body>
 </html>
